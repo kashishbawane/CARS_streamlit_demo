@@ -4,7 +4,7 @@ import seaborn as sb
 import matplotlib.pyplot as plt
 
 # Load dataset
-df = pd.read_csv("../DataSet/CARS.csv")
+df = pd.read_csv("CARS.csv")
 
 st.title("Car Horsepower Visualization")
 
