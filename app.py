@@ -4,24 +4,22 @@ import seaborn as sb
 import matplotlib.pyplot as plt
 
 # Load dataset
-df = pd.read_csv("../Datasets/CARS.csv")
+df = pd.read_csv("../DataSet/CARS.csv")
 
-# Streamlit title
 st.title("Car Horsepower Visualization")
 
-# Show sample data
-st.write("### Preview of Data")
-st.write(df.head(5))
-
-# Dropdown for selecting brand
+# Show available brands
 brands = df['Make'].unique()
-brand = st.selectbox("Select a Car Brand", brands)
+selected_brand = st.selectbox("Select a Car Brand:", brands)
 
-# Filter data by brand
-s = df[df['Make'] == brand]
+# Filter data
+s = df[df['Make'] == selected_brand]
 
-# Plot with seaborn
-fig, ax = plt.subplots(figsize=(10, 6))
-sb.barplot(x="Model", y="Horsepower", data=s, ax=ax)
+# Plot
+fig, ax = plt.subplots(figsize=(10, 5))
+sb.barplot(x=s['Model'], y=s['Horsepower'], ax=ax)
 plt.xticks(rotation=90)
+plt.tight_layout()
+
+# Display chart
 st.pyplot(fig)
