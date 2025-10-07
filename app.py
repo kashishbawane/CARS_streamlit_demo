@@ -113,3 +113,27 @@ st.markdown(
 )
 
 st.pyplot(fig)
+# --- Visualization ---
+st.markdown("---")
+st.subheader(f"📊 Horsepower Visualization for {selected_brand}")
+
+if not filtered_df.empty:
+    if chart_type == "Bar Chart":
+        fig = px.bar(filtered_df, x="Model", y="Horsepower", color="Horsepower",
+                     color_continuous_scale="viridis", title=f"{selected_brand} - Horsepower by Model")
+    elif chart_type == "Line Chart":
+        fig = px.line(filtered_df, x="Model", y="Horsepower", markers=True, color_discrete_sequence=["orange"])
+    elif chart_type == "Scatter Plot":
+        fig = px.scatter(filtered_df, x="Model", y="Horsepower", color="Horsepower",
+                         size="Horsepower", hover_data=["Model"])
+    elif chart_type == "Box Plot":
+        fig = px.box(filtered_df, x="Model", y="Horsepower", color="Model")
+    elif chart_type == "Pie Chart":
+        fig = px.pie(filtered_df, names="Model", values="Horsepower",
+                     title=f"{selected_brand} - Horsepower Distribution")
+
+    # ✅ Use this for Plotly
+    st.plotly_chart(fig, use_container_width=True)
+else:
+    st.warning("⚠️ No data available for the selected filters.")
+
